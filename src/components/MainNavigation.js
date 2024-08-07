@@ -2,12 +2,29 @@ import { NavLink } from "react-router-dom";
 
 import classes from "./MainNavigation.module.css";
 import NewsletterSignup from "./NewsletterSignup";
+import AuthService from "../services/AuthService";
 
 function MainNavigation() {
+  const handleLogin = () => {
+    AuthService.doLogin();
+  };
+
+  const isLoggedIn = AuthService.isLoggedIn();
+  const username = AuthService.getUsername();
+
   return (
     <header className={classes.header}>
       <nav>
         <ul className={classes.list}>
+          {!isLoggedIn ? (
+            <li>
+              <button onClick={handleLogin} className={classes.loginButton}>
+                Login
+              </button>
+            </li>
+          ) : (
+            <li className={classes.username}>{username}</li>
+          )}
           <li>
             <NavLink
               to="/"
