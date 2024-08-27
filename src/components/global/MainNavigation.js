@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
 import classes from "./MainNavigation.module.css";
-import AuthService from "../services/AuthService";
+import AuthService from "../../services/AuthService";
 
-import logoImage from "../../src/assets/running-shoe.png";
-import profileImage from "../../src/assets/profile.png";
+import logoImage from "../../assets/running-shoe.png";
+import profileImage from "../../assets/profile.png";
 
 function MainNavigation() {
   const handleLogin = () => {

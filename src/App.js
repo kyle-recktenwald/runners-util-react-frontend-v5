@@ -11,7 +11,7 @@ import EventsRootLayout from "./pages/EventsRoot";
 import HomePage from "./pages/HomePage";
 import NewEventPage from "./pages/NewEvent";
 import RootLayout from "./pages/Root";
-import { action as manipulateEventAction } from "./components/EventForm";
+import { action as manipulateEventAction } from "./components/global/EventForm";
 import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
 
 const router = createBrowserRouter([

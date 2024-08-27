@@ -1,6 +1,6 @@
 import { useLoaderData, json, defer, Await } from "react-router-dom";
 
-import EventsList from "../components/EventsList";
+import EventsList from "../components/global/EventsList";
 import { Suspense } from "react";
 
 function EventsPage() {
