@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import classes from "./MainNavigation.module.css";
 import AuthService from "../../services/AuthService";
@@ -18,9 +19,11 @@ function MainNavigation() {
     <header className={classes.mainHeader}>
       <nav className={classes.navContainer}>
         <a href="#">
-          <div className={classes.homeIconContainer}>
-            <img src={logoImage} alt="Home" class={classes.homeIcon} />
-          </div>
+          <Link to={`/`}>
+            <div className={classes.homeIconContainer}>
+              <img src={logoImage} alt="Home" class={classes.homeIcon} />
+            </div>
+          </Link>
         </a>
         <ul className={classes.navList}>
           <li>
