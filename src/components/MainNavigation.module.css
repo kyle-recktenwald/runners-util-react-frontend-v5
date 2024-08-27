@@ -1,22 +1,108 @@
-.header {
-  max-width: 60rem;
-  margin: auto;
-  padding: 2rem;
+.mainHeader {
+  background-color: #007bff;
+  padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  color: white;
+  /* Removed justify-content: space-between */
 }
 
-.list {
+.navContainer {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  width: 100%;
 }
 
-.list a {
-  text-decoration: none;
-  color: var(--color-primary-400);
+.homeIconContainer {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
 }
 
-.list a:hover,
-.list a.active {
-  color: var(--color-primary-800);
+.homeIcon {
+  height: 48px; /* Adjusted size to fit within 44px container */
+  width: 43px;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin-left: 0px;
+}
+
+.navList li {
+  display: inline;
+}
+
+.navList a {
+  color: white;
+  font-weight: bold;
+}
+
+.navList a:hover {
+  text-decoration: underline;
+}
+
+/* Profile Dropdown */
+.profileDropdown {
+  position: relative;
+  margin-left: auto; /* Pushes the profile-dropdown to the far right */
+}
+
+.menuTrigger img {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  position: absolute; /* Changed from fixed to absolute */
+  top: 60px; /* Adjust based on your header height */
+  right: 0; /* Aligns the dropdown menu to the right edge of the profile-dropdown */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  padding: 10px 0;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+.dropdownMenu.active {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdownMenu h3 {
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdownMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownMenu ul li {
+  padding: 10px;
+  text-align: center;
+}
+
+.dropdownMenu ul li:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
 }

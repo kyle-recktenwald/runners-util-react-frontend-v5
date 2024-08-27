@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 
 import classes from "./MainNavigation.module.css";
-import NewsletterSignup from "./NewsletterSignup";
 import AuthService from "../services/AuthService";
+
+import logoImage from "../../src/assets/running-shoe.png";
+import profileImage from "../../src/assets/profile.png";
 
 function MainNavigation() {
   const handleLogin = () => {
@@ -13,52 +15,44 @@ function MainNavigation() {
   const username = AuthService.getUsername();
 
   return (
-    <header className={classes.header}>
-      <nav>
-        <ul className={classes.list}>
-          {!isLoggedIn ? (
-            <li>
-              <button onClick={handleLogin} className={classes.loginButton}>
-                Login
-              </button>
-            </li>
-          ) : (
-            <li className={classes.username}>{username}</li>
-          )}
+    <header className={classes.mainHeader}>
+      <nav className={classes.navContainer}>
+        <a href="#">
+          <div className={classes.homeIconContainer}>
+            <img src={logoImage} alt="Home" class={classes.homeIcon} />
+          </div>
+        </a>
+        <ul className={classes.navList}>
           <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-              end
-            >
-              Home
-            </NavLink>
+            <a href="#">Track a New Run</a>
           </li>
           <li>
-            <NavLink
-              to="/events"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Events
-            </NavLink>
+            <a href="#">View Runs</a>
           </li>
           <li>
-            <NavLink
-              to="/newsletter"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Newsletter
-            </NavLink>
+            <a href="#">View Routes</a>
           </li>
         </ul>
+        <div className={classes.profileDropdown}>
+          <div className={classes.menuTrigger}>
+            <img src={profileImage} alt="Profile" />
+          </div>
+          <div className={classes.dropdownMenu}>
+            <h3>Username</h3>
+            <ul>
+              <li>
+                <a href="#">View Profile</a>
+              </li>
+              <li>
+                <a href="#">Login</a>
+              </li>
+              <li>
+                <a href="#">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
-      <NewsletterSignup />
     </header>
   );
 }
