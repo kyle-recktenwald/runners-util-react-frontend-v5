@@ -68,7 +68,6 @@ function MainNavigation() {
               dropdownActive ? classes.active : ""
             }`}
           >
-            <h3>{username || "Username"}</h3>
             <ul>
               {!isLoggedIn && (
                 <li onClick={handleLogin}>
