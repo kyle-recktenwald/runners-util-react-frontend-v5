@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink, Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import AuthService from "../../services/AuthService";
 
@@ -8,50 +7,79 @@ import logoImage from "../../assets/running-shoe.png";
 import profileImage from "../../assets/profile.png";
 
 function MainNavigation() {
+  const [dropdownActive, setDropdownActive] = useState(false);
+  const dropdownRef = useRef(null);
+
   const handleLogin = () => {
+    AuthService.doLogin();
+  };
+
+  const handleLogout = () => {
+    AuthService.doLogout();
     AuthService.doLogin();
   };
 
   const isLoggedIn = AuthService.isLoggedIn();
   const username = AuthService.getUsername();
 
+  const toggleDropdown = (event) => {
+    setDropdownActive((prevActive) => !prevActive);
+    event.stopPropagation(); // Prevents closing the dropdown immediately after opening
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownActive(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <header className={classes.mainHeader}>
       <nav className={classes.navContainer}>
-        <a href="#">
-          <Link to={`/`}>
-            <div className={classes.homeIconContainer}>
-              <img src={logoImage} alt="Home" class={classes.homeIcon} />
-            </div>
-          </Link>
-        </a>
+        <Link to={`/`}>
+          <div className={classes.homeIconContainer}>
+            <img src={logoImage} alt="Home" className={classes.homeIcon} />
+          </div>
+        </Link>
         <ul className={classes.navList}>
           <li>
-            <a href="#">Track a New Run</a>
+            <NavLink to="#">Track a New Run</NavLink>
           </li>
           <li>
-            <a href="#">View Runs</a>
+            <NavLink to="#">View Runs</NavLink>
           </li>
           <li>
-            <a href="#">View Routes</a>
+            <NavLink to="#">View Routes</NavLink>
           </li>
         </ul>
-        <div className={classes.profileDropdown}>
-          <div className={classes.menuTrigger}>
+        <div className={classes.profileDropdown} ref={dropdownRef}>
+          <div className={classes.menuTrigger} onClick={toggleDropdown}>
             <img src={profileImage} alt="Profile" />
           </div>
-          <div className={classes.dropdownMenu}>
-            <h3>Username</h3>
+          <div
+            className={`${classes.dropdownMenu} ${
+              dropdownActive ? classes.active : ""
+            }`}
+          >
+            <h3>{username || "Username"}</h3>
             <ul>
-              <li>
-                <a href="#">View Profile</a>
-              </li>
-              <li>
-                <a href="#">Login</a>
-              </li>
-              <li>
-                <a href="#">Logout</a>
-              </li>
+              {!isLoggedIn && (
+                <li onClick={handleLogin}>
+                  <NavLink to="#">Login</NavLink>
+                </li>
+              )}
+              {isLoggedIn && (
+                <li onClick={handleLogout}>
+                  <NavLink to="#">Logout</NavLink>
+                </li>
+              )}
             </ul>
           </div>
         </div>
