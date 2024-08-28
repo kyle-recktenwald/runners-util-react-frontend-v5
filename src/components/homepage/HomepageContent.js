@@ -4,7 +4,7 @@ import classes from "./HomepageContent.module.css";
 import AuthService from "../../services/AuthService";
 
 function HomepageContent({}) {
-  const isLoggedIn = AuthService.isLoggedIn;
+  const isLoggedIn = AuthService.isLoggedIn();
 
   const handleLoginSignup = () => {
     AuthService.doLogin();
