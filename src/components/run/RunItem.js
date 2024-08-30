@@ -15,10 +15,8 @@ function RunItem({ run }) {
 
   return (
     <article className={classes.run}>
-      <img src={run.image} alt={run.title} />
-      <h1>{run.title}</h1>
-      <time>{run.date}</time>
-      <p>{run.description}</p>
+      <time>{run.startDateTime}</time>
+      <p>{run.duration}</p>
       <menu className={classes.actions}>
         <Link to="edit">Edit</Link>
         <button onClick={startDeleteHandler}>Delete</button>

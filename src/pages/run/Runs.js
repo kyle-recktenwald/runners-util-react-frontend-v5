@@ -1,5 +1,7 @@
 import { useLoaderData, json, defer, Await } from "react-router-dom";
 
+import AuthService from "../../services/AuthService";
+
 import RunList from "../../components/run/RunList";
 import { Suspense } from "react";
 
@@ -18,27 +20,43 @@ function RunsPage() {
 export default RunsPage;
 
 async function loadRuns() {
-  const response = await fetch("http://localhost:8080/api/runs");
+  try {
+    await AuthService.updateToken(() => {
+      console.log("Token updated successfully.");
+    });
+    const token = AuthService.getToken();
+    const headers = {
+      "Content-Type": "application/json",
+    };
 
-  if (!response.ok) {
-    //return { isError: true, message: "Could not fetch runs." };
-    /* throw new Response(JSON.stringify({ message: "Could not fetch runs." }), {
-      status: 500,
-    }); */
-    return json(
-      { message: "Could not fetch runs." },
-      {
-        status: 500,
-      }
-    );
-  } else {
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch("http://backend-service:8080/api/runs", {
+      headers,
+    });
+
+    if (!response.ok) {
+      return {
+        isError: true,
+        message: "Could not fetch runs.",
+      };
+    }
+
     const resData = await response.json();
-    return resData.runs;
+
+    console.log(resData);
+    //console.log(resData.runs);
+    return resData || null;
+  } catch (error) {
+    console.error("Error fetching runs:", error);
+    return null;
   }
 }
 
 export function loader() {
   return defer({
-    runs: loadRuns(),
+    runs: loadRuns(), // Always resolve to a value or null
   });
 }

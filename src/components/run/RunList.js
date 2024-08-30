@@ -1,11 +1,11 @@
-//import { useLoaderData } from "react-router-dom";
-
 import { Link } from "react-router-dom";
-
 import classes from "./RunList.module.css";
 
 function RunList({ runs }) {
-  //const runs = useLoaderData();
+  // Check if runs is null or an empty array and handle it appropriately
+  if (!runs || runs.length === 0) {
+    return <p className={classes.noRuns}>No runs available.</p>;
+  }
 
   return (
     <div className={classes.runs}>
@@ -14,10 +14,9 @@ function RunList({ runs }) {
         {runs.map((run) => (
           <li key={run.id} className={classes.item}>
             <Link to={`/runs/${run.id}`}>
-              <img src={run.image} alt={run.title} />
               <div className={classes.content}>
-                <h2>{run.title}</h2>
-                <time>{run.date}</time>
+                <time>{run.startDateTime}</time>
+                <h2>{run.duration}</h2>
               </div>
             </Link>
           </li>

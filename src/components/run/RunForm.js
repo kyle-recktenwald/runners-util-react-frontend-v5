@@ -30,43 +30,13 @@ function RunForm({ method, run }) {
         </ul>
       )}
       <p>
-        <label htmlFor="title">Title</label>
+        <label htmlFor="startDateTime">Date:</label>
         <input
-          id="title"
-          type="text"
-          name="title"
-          required
-          defaultValue={run ? run.title : ""}
-        />
-      </p>
-      <p>
-        <label htmlFor="image">Image</label>
-        <input
-          id="image"
-          type="url"
-          name="image"
-          required
-          defaultValue={run ? run.image : ""}
-        />
-      </p>
-      <p>
-        <label htmlFor="date">Date</label>
-        <input
-          id="date"
+          id="startDateTime"
           type="date"
-          name="date"
+          name="startDateTime"
           required
-          defaultValue={run ? run.date : ""}
-        />
-      </p>
-      <p>
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          rows="5"
-          required
-          defaultValue={run ? run.description : ""}
+          defaultValue={run ? run.startDateTime : ""}
         />
       </p>
       <div className={classes.actions}>
