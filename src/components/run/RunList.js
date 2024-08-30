@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import classes from "./RunList.module.css";
 
+import { formatTimestamp, formatDuration } from "../global/FormatUtils";
+
 function RunList({ runs }) {
   // Check if runs is null or an empty array and handle it appropriately
   if (!runs || runs.length === 0) {
@@ -15,8 +17,10 @@ function RunList({ runs }) {
           <li key={run.id} className={classes.item}>
             <Link to={`/runs/${run.id}`}>
               <div className={classes.content}>
-                <time>{run.startDateTime}</time>
-                <h2>{run.duration}</h2>
+                <h2>
+                  <time>{formatTimestamp(run.startDateTime)}</time>
+                </h2>
+                <h3>{formatDuration(run.duration)}</h3>
               </div>
             </Link>
           </li>
