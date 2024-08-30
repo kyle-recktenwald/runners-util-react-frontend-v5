@@ -1,18 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import EditEventPage from "./pages/EditEvent";
-import ErrorPage from "./pages/Error";
-import EventDetailPage, {
-  loader as eventDetailLoader,
-  action as deleteEventAction,
-} from "./pages/EventDetail";
-import EventsPage, { loader as eventsLoader } from "./pages/Events";
-import EventsRootLayout from "./pages/EventsRoot";
-import HomePage from "./pages/HomePage";
-import NewEventPage from "./pages/NewEvent";
-import RootLayout from "./pages/Root";
-import { action as manipulateEventAction } from "./components/global/EventForm";
-import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
+import EditRunPage from "./pages/run/EditRun";
+import ErrorPage from "./pages/global/Error";
+import RunDetailPage, {
+  loader as runDetailLoader,
+  action as deleteRunAction,
+} from "./pages/run/RunDetail";
+import RunsPage, { loader as runsLoader } from "./pages/run/Runs";
+import RunsRootLayout from "./pages/run/RunsRoot";
+import HomePage from "./pages/homepage/HomePage";
+import NewRunPage from "./pages/run/NewRun";
+import RootLayout from "./pages/global/Root";
+import { action as manipulateRunAction } from "./components/run/RunForm";
 
 const router = createBrowserRouter([
   {
@@ -22,42 +21,37 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "events",
-        element: <EventsRootLayout />,
+        path: "runs",
+        element: <RunsRootLayout />,
         children: [
           {
             index: true,
-            element: <EventsPage />,
-            loader: eventsLoader,
+            element: <RunsPage />,
+            loader: runsLoader,
           },
           {
-            path: ":eventId",
-            id: "event-detail",
-            loader: eventDetailLoader,
+            path: ":runId",
+            id: "run-detail",
+            loader: runDetailLoader,
             children: [
               {
                 index: true,
-                element: <EventDetailPage />,
-                action: deleteEventAction,
+                element: <RunDetailPage />,
+                action: deleteRunAction,
               },
               {
                 path: "edit",
-                element: <EditEventPage />,
-                action: manipulateEventAction,
+                element: <EditRunPage />,
+                action: manipulateRunAction,
               },
             ],
           },
           {
             path: "new",
-            element: <NewEventPage />,
-            action: manipulateEventAction,
+            element: <NewRunPage />,
+            action: manipulateRunAction,
           },
         ],
-      },
-      {
-        path: "newsletter",
-        element: <NewsletterPage />,
-        action: newsletterAction,
       },
     ],
   },

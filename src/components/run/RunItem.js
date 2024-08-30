@@ -1,8 +1,8 @@
 import { Link, useSubmit } from "react-router-dom";
 
-import classes from "./EventItem.module.css";
+import classes from "./RunItem.module.css";
 
-function EventItem({ event }) {
+function RunItem({ run }) {
   const submit = useSubmit();
 
   function startDeleteHandler() {
@@ -14,11 +14,11 @@ function EventItem({ event }) {
   }
 
   return (
-    <article className={classes.event}>
-      <img src={event.image} alt={event.title} />
-      <h1>{event.title}</h1>
-      <time>{event.date}</time>
-      <p>{event.description}</p>
+    <article className={classes.run}>
+      <img src={run.image} alt={run.title} />
+      <h1>{run.title}</h1>
+      <time>{run.date}</time>
+      <p>{run.description}</p>
       <menu className={classes.actions}>
         <Link to="edit">Edit</Link>
         <button onClick={startDeleteHandler}>Delete</button>
@@ -27,4 +27,4 @@ function EventItem({ event }) {
   );
 }
 
-export default EventItem;
+export default RunItem;

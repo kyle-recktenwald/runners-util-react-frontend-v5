@@ -1,4 +1,4 @@
-import HomepageContent from "../components/homepage/HomepageContent";
+import HomepageContent from "../../components/homepage/HomepageContent";
 
 function HomePage() {
   return <HomepageContent></HomepageContent>;
