@@ -45,9 +45,8 @@ async function loadRuns() {
     }
 
     const resData = await response.json();
-
     console.log(resData);
-    //console.log(resData.runs);
+
     return resData || null;
   } catch (error) {
     console.error("Error fetching runs:", error);
@@ -57,6 +56,6 @@ async function loadRuns() {
 
 export function loader() {
   return defer({
-    runs: loadRuns(), // Always resolve to a value or null
+    runs: loadRuns(),
   });
 }

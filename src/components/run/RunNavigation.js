@@ -9,17 +9,6 @@ function RunNavigation() {
         <ul className={classes.list}>
           <li>
             <NavLink
-              to="/runs"
-              classes={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-              end
-            >
-              All Runs
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               to="/runs/new"
               classes={({ isActive }) =>
                 isActive ? classes.active : undefined
