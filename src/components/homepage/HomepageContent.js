@@ -4,7 +4,7 @@ import classes from "./HomepageContent.module.css";
 
 function HomepageContent({}) {
   const handleLoginSignup = () => {
-    AuthService.doLogin();
+    window.location.href = "https://runnersutil.local/api/auth/oauth/login";
   };
 
   return (
