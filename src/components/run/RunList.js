@@ -14,8 +14,8 @@ function RunList({ runs }) {
       <h1>All Runs</h1>
       <ul className={classes.list}>
         {runs.map((run) => (
-          <li key={run.id} className={classes.item}>
-            <Link to={`/runs/${run.id}`}>
+          <li key={run.runId} className={classes.item}>
+            <Link to={`/runs/${run.runId}`}>
               <div className={classes.content}>
                 <h2>
                   <time>{formatTimestamp(run.startDateTime)}</time>
