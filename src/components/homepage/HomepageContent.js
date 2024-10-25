@@ -4,7 +4,8 @@ import classes from "./HomepageContent.module.css";
 
 function HomepageContent({}) {
   const handleLoginSignup = () => {
-    window.location.href = "https://runnersutil.local/api/auth/oauth/login";
+    window.location.href =
+      "https://runnersutil.local/api/auth/public/oauth/login";
   };
 
   return (
