@@ -1,15 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-import "./index.css";
 import App from "./App";
-import AuthService from "./services/AuthService";
+import { KeycloakProvider } from "./state/KeycloakContext";
 
-const renderApp = () =>
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <KeycloakProvider>
       <App />
-    </React.StrictMode>
-  );
-
-AuthService.initKeycloak(renderApp);
+    </KeycloakProvider>
+  </React.StrictMode>
+);
