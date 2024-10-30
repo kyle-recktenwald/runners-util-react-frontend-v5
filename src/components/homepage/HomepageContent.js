@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { useKeycloak } from "../../state/KeycloakContext";
 
 import classes from "./HomepageContent.module.css";
-import AuthService from "../../services/AuthService";
 
 function HomepageContent({}) {
   const { isAuthenticated } = useKeycloak();
 
   const handleLoginSignup = () => {
-    AuthService.doLogin();
+    window.location.href =
+      "https://runnersutil.local/api/auth/public/oauth/login";
   };
 
   return (
@@ -16,6 +16,7 @@ function HomepageContent({}) {
       <h1>Welcome to Runner Utils</h1>
       <p>Record your workout data and manage your running routes with ease.</p>
       {!isAuthenticated && (
+      {true && (
         <button className={classes.homeButton} onClick={handleLoginSignup}>
           Login or Signup
         </button>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
-import AuthService from "../../services/AuthService";
 
 import logoImage from "../../assets/running-shoe.png";
 import profileImage from "../../assets/profile.png";
@@ -12,17 +11,11 @@ function MainNavigation() {
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    AuthService.doLogin();
-  };
+  const handleLogin = () => {};
 
   const handleLogout = () => {
-    AuthService.doLogout();
     navigate("/");
   };
-
-  const isLoggedIn = AuthService.isLoggedIn();
-  const username = AuthService.getUsername();
 
   const toggleDropdown = (event) => {
     setDropdownActive((prevActive) => !prevActive);
@@ -51,23 +44,23 @@ function MainNavigation() {
           </div>
         </Link>
         <ul className={classes.navList}>
-          {isLoggedIn && (
+          {true && (
             <li>
               <NavLink to="#">Track a New Run</NavLink>
             </li>
           )}
-          {isLoggedIn && (
+          {true && (
             <li>
               <NavLink to="#">View Runs</NavLink>
             </li>
           )}
-          {isLoggedIn && (
+          {true && (
             <li>
               <NavLink to="#">View Routes</NavLink>
             </li>
           )}
         </ul>
-        {isLoggedIn && (
+        {true && (
           <div className={classes.profileDropdown} ref={dropdownRef}>
             <div className={classes.menuTrigger} onClick={toggleDropdown}>
               <img src={profileImage} alt="Profile" />
@@ -78,12 +71,12 @@ function MainNavigation() {
               }`}
             >
               <ul>
-                {!isLoggedIn && (
+                {true && (
                   <li onClick={handleLogin}>
                     <NavLink to="#">Login</NavLink>
                   </li>
                 )}
-                {isLoggedIn && (
+                {true && (
                   <li onClick={handleLogout}>
                     <NavLink to="#">Logout</NavLink>
                   </li>
