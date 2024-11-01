@@ -26,7 +26,10 @@ async function loadRuns() {
 }
 
 async function fetchRuns() {
-  const response = await fetch("https://runnersutil.local/api/runs", {
+  const backendDomain = "http://backend-service:8080";
+  const proxyDomain = "https://runnersutil.local";
+
+  const response = await fetch(proxyDomain + "/api/runs", {
     method: "GET",
     headers: {
       accept: "application/json",

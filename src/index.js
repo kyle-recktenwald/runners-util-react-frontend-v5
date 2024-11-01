@@ -9,6 +9,5 @@ root.render(
     <KeycloakProvider>
       <App />
     </KeycloakProvider>
-    <App />
   </React.StrictMode>
 );
