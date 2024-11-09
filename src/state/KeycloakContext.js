@@ -64,10 +64,10 @@ export const KeycloakProvider = ({ children }) => {
       }
     };
 
-    checkInitialAuth(); // Initial check on mount
-    const intervalId = setInterval(checkTokenExpiryAndRefresh, 30000); // Interval check every 30 seconds
+    checkInitialAuth();
+    const intervalId = setInterval(checkTokenExpiryAndRefresh, 30000);
 
-    return () => clearInterval(intervalId); // Cleanup on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
