@@ -70,8 +70,27 @@ export const KeycloakProvider = ({ children }) => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const logout = async () => {
+    try {
+      const proxyDomain = "https://runnersutil.local";
+      const response = await fetch(proxyDomain + "/api/auth/oauth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      if (response.ok || response.status === 204) {
+        setIsAuthenticated(false);
+      } else {
+        console.error("Failed to logout:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   return (
-    <KeycloakContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <KeycloakContext.Provider
+      value={{ isAuthenticated, setIsAuthenticated, logout }}
+    >
       {children}
     </KeycloakContext.Provider>
   );

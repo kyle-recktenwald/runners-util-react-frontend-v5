@@ -4,16 +4,17 @@ import classes from "./MainNavigation.module.css";
 
 import logoImage from "../../assets/running-shoe.png";
 import profileImage from "../../assets/profile.png";
+import { useKeycloak } from "../../state/KeycloakContext";
 
 function MainNavigation() {
   const [dropdownActive, setDropdownActive] = useState(false);
   const dropdownRef = useRef(null);
-
+  const { isAuthenticated, logout } = useKeycloak();
   const navigate = useNavigate();
-
   const handleLogin = () => {};
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logout();
     navigate("/");
   };
 
@@ -71,12 +72,12 @@ function MainNavigation() {
               }`}
             >
               <ul>
-                {true && (
+                {!isAuthenticated && (
                   <li onClick={handleLogin}>
                     <NavLink to="#">Login</NavLink>
                   </li>
                 )}
-                {true && (
+                {isAuthenticated && (
                   <li onClick={handleLogout}>
                     <NavLink to="#">Logout</NavLink>
                   </li>
